@@ -117,11 +117,15 @@ class MainFrame extends JFrame {
 			}
 			StringBuffer sb = new StringBuffer();
 			Account thisAcct = null;
-			for (Iterator<Account> li = accounts.iterator(); li.hasNext();) {
-				thisAcct = (Account)li.next();
-				sb.append(thisAcct.toString()+"\n");
+			if (!accounts.isEmpty()) {
+				for (Iterator<Account> li = accounts.iterator(); li.hasNext();) {
+					thisAcct = (Account) li.next();
+					sb.append(thisAcct.toString() + "\n");
+				}
 			}
-
+			else {
+				sb.append("No current accounts!");
+			}
 			JOptionPane.showMessageDialog(null, sb.toString());
 		}
 	}
