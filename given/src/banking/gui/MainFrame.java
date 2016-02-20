@@ -9,6 +9,7 @@ import java.util.*;
 import java.awt.FlowLayout;
 import java.awt.Container;
 import java.awt.event.*;
+
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -132,8 +133,18 @@ class MainFrame extends JFrame {
 			String type = typeOptions.getSelectedItem().toString();
 			String name = nameField.getText();
 			String balance = balanceField.getText();
-
-			if (myServer.newAccount(type, name, Float.parseFloat(balance))) {
+			Boolean success = true;
+			float newBal = 0;
+			try {
+				newBal = Float.parseFloat(balance);
+				success = true;
+			} catch (Exception e1) {
+				success = false;
+				e1.printStackTrace();
+			}
+			
+			if (success) {
+				myServer.newAccount(type, name, newBal);
 				JOptionPane.showMessageDialog(null, "Account created successfully");
 			} else {
 				JOptionPane.showMessageDialog(null, "Account not created!");
