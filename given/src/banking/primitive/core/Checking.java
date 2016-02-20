@@ -39,7 +39,8 @@ public class Checking extends Account {
 	public boolean withdraw(float amount) {
 		if (amount > 0.0f) {		
 			// KG: incorrect, last balance check should be >=
-			if (getState() == State.OPEN || (getState() == State.OVERDRAWN && balance >= -100.0f)) {
+			//Also State.OVERDRAFT is unnecessary if the balance is already being checked for.
+			if (getState() == State.OPEN || balance >= -100.0f) {
 				balance = balance - amount;
 				numWithdraws++;
 				if (numWithdraws > 10)
